@@ -1,5 +1,5 @@
 class ArticlesController < ApplicationController
-  before_action :find_article, only: %i[show edit]
+  before_action :find_article, only: %i[show edit update destroy]
 
   def index
     @articles = Article.all
@@ -22,11 +22,13 @@ class ArticlesController < ApplicationController
   end
 
   def update
-    @article = Article.update(article_params)
+    @article.update(article_params)
     redirect_to article_path(@article)
   end
 
   def destroy
+    @article.destroy
+    redirect_to articles_path
   end
 
   private
